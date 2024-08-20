@@ -2,7 +2,7 @@ import { Platform, View, Text } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function HomeScreen() {
+const  Home = () => {
   return (
     <SafeAreaView className="bg-white flex-1 justify-center items-center">
       <Text className="text-red-900">Open up App.js to start working on your app!</Text>
@@ -13,3 +13,6 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
+
+
+export default Home
