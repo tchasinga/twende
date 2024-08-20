@@ -12,7 +12,8 @@ export default function Singup() {
     password: "",
   });
 
-  const onSingupPress = () => {
+  const onSingupPress = async (e:any) => {
+    e.preventDefault();
     alert("Sing up first please");
   };
 
