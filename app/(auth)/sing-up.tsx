@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { View, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
+import OAuth from "@/components/OAuth";
 
 export default function Singup() {
   const [form, setForm] = useState({
@@ -49,10 +50,11 @@ export default function Singup() {
             value={form.password}
             onChangeText={(value) => setForm({ ...form, password: value })} label={""} />
 
-          <CustonButton title="Sing up" onPress={onSingupPress} className="mt-3 rounded-full" />
+          <CustonButton title="Sing up" onPress={onSingupPress} className="mt-3 rounded-full shadow-none" />
 
           {/* Auth with Google... */}
-
+          <OAuth/>
+          
           {/* Extr links */}
           <Link href="/(auth)/sing-in" className="flex justify-center items-center mt-5">
             <View className="flex flex-row justify-center items-center mt-5">
