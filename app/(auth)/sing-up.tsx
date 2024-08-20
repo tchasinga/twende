@@ -1,3 +1,4 @@
+import CustonButton from "@/components/CustonButton";
 import InputField from "../../components/InputField";
 import { icons, images } from "@/constants/data";
 import React, { useState } from "react";
@@ -10,6 +11,10 @@ export default function Singup() {
     email: "",
     password: "",
   });
+
+  const onSingupPress = () => {
+    alert("Sing up first please");
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -41,6 +46,8 @@ export default function Singup() {
             icon={icons.lock}
             value={form.password}
             onChangeText={(value) => setForm({ ...form, password: value })} label={""}/>
+
+            <CustonButton title="Sing up" onPress={onSingupPress} className="mt-3" />
         </View>
       </View>
     </SafeAreaView>
