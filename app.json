@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/trying_splash1.png",
-      "resizeMode": "full",
+      "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
