@@ -4,6 +4,7 @@ import { icons, images } from "@/constants/data";
 import React, { useState } from "react";
 import { View, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Link } from "expo-router";
 
 export default function Singup() {
   const [form, setForm] = useState({
@@ -12,7 +13,7 @@ export default function Singup() {
     password: "",
   });
 
-  const onSingupPress = async (e:any) => {
+  const onSingupPress = async (e: any) => {
     e.preventDefault();
     alert("Sing up first please");
   };
@@ -36,19 +37,29 @@ export default function Singup() {
             placeholder="Enter your name"
             icon={icons.person}
             value={form.name}
-            onChangeText={(value) => setForm({ ...form, name: value })} label={""}/>
+            onChangeText={(value) => setForm({ ...form, name: value })} label={""} />
           <InputField
             placeholder="Enter your gamil"
             icon={icons.email}
             value={form.email}
-            onChangeText={(value) => setForm({ ...form, email: value })} label={""}/>
+            onChangeText={(value) => setForm({ ...form, email: value })} label={""} />
           <InputField
             placeholder="Enter your password"
             icon={icons.lock}
             value={form.password}
-            onChangeText={(value) => setForm({ ...form, password: value })} label={""}/>
+            onChangeText={(value) => setForm({ ...form, password: value })} label={""} />
 
-            <CustonButton title="Sing up" onPress={onSingupPress} className="mt-3" />
+          <CustonButton title="Sing up" onPress={onSingupPress} className="mt-3 rounded-full" />
+
+          {/* Auth with Google... */}
+
+          {/* Extr links */}
+          <Link href="/(auth)/sing-in" className="flex justify-center items-center mt-5">
+            <View className="flex flex-row justify-center items-center mt-5">
+              <Text className="text-slate-600 text-sm">Already have an account?</Text>
+              <Text className="text-primary-500 text-sm ml-2">Sing in</Text>
+            </View>
+          </Link>
         </View>
       </View>
     </SafeAreaView>
