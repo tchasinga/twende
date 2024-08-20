@@ -60,6 +60,8 @@ export default function Singup() {
               <Text className="text-primary-500 text-sm ml-2">Sing in</Text>
             </View>
           </Link>
+
+          {/* Verification modal will be added here soon...*/}
         </View>
       </View>
     </SafeAreaView>
