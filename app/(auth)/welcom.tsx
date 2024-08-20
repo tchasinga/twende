@@ -1,3 +1,4 @@
+import CustonButton from '@/components/CustonButton';
 import { onboarding } from '@/constants/data';
 import { router } from 'expo-router';
 import React, { useRef, useState } from 'react';
@@ -36,11 +37,12 @@ export default function Welcomeboards() {
               <View className='flex flex-row items-center justify-center w-full mt-10'>
                 <Text className='text-black text-3xl font-bold mx-10 text-center'>{item.title}</Text>
               </View>
-              <Text className='text-md font-JakartaSemiBold text-center'>{item.description}</Text>
+              <Text className='text-md text-center text-slate-600'>{item.description}</Text>
             </View>
           ))
         }
       </Swiper>
+      <CustonButton title={"Next"} className={"w-11/12 mt-10"}/>
     </SafeAreaView>
   );
 }
