@@ -27,12 +27,20 @@ export default function Singup() {
 
         <View className="p-5">
           <InputField
-            label={"Name"}
             placeholder="Enter your name"
             icon={icons.person}
             value={form.name}
-            onChange={(value: any) => setForm({...form, name: value})}
-          />
+            onChangeText={(value) => setForm({ ...form, name: value })} label={""}/>
+          <InputField
+            placeholder="Enter your gamil"
+            icon={icons.email}
+            value={form.email}
+            onChangeText={(value) => setForm({ ...form, email: value })} label={""}/>
+          <InputField
+            placeholder="Enter your password"
+            icon={icons.lock}
+            value={form.password}
+            onChangeText={(value) => setForm({ ...form, password: value })} label={""}/>
         </View>
       </View>
     </SafeAreaView>
