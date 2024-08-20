@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const  Home = () => {
   return (
-    <SafeAreaView className="bg-white flex-1 justify-center items-center">
+    <SafeAreaView className="">
       <Text className="text-red-900">Open up App.js to start working on your app!</Text>
       <Text className="text-lg mt-4">
         {Platform.OS === 'android' ? 'Welcome on Android !!' : 'Welcome on iPhone'}
