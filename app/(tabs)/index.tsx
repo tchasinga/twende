@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform, View, Text , StatusBar } from 'react-native';
+import { Platform, View, Text , StatusBar } from 'react-native';
 
 export default function HomeScreen() {
   return (
