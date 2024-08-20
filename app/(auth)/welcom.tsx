@@ -1,7 +1,7 @@
 import { onboarding } from '@/constants/data';
 import { router } from 'expo-router';
 import React, { useRef, useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Swiper from 'react-native-swiper';
 
@@ -31,7 +31,8 @@ export default function Welcomeboards() {
         {/* Adding All slides... is there */}
         {
           onboarding.map((item) =>(
-            <View>
+            <View className='flex items-center justify-center p-5'>
+              <Image source={item.image} className='w-full h-[300px]' resizeMode='contain'/>
               <Text>{item.title}</Text>
             </View>
           ))
