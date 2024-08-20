@@ -1,0 +1,14 @@
+import { Platform, View, Text, StatusBar } from 'react-native';
+
+export default function HomeScreen() {
+  return (
+    <View className="bg-white flex-1 justify-center items-center">
+      <Text className="text-red-900">Open up App.js to start working on your app!</Text>
+      <Text className="text-lg mt-4">
+        {Platform.OS === 'android' ? 'Welcome on Android' : 'Welcome on iPhone'}
+      </Text>
+      <StatusBar />
+    </View>
+  );
+}
+============================================================================================================

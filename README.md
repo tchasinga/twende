@@ -1,1 +1,1 @@
-# twende
+stoped place today 1:28:45 / 5:32;45
