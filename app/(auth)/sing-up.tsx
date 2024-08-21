@@ -6,18 +6,68 @@ import { View, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
 import OAuth from "@/components/OAuth";
+import { useSignUp } from '@clerk/clerk-expo'
+import { useRouter } from 'expo-router'
+
 
 export default function Singup() {
+  const { isLoaded, signUp, setActive } = useSignUp()
+  const router = useRouter()
+
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
   });
 
-  const onSingupPress = async (e: any) => {
-    e.preventDefault();
-    alert("Sing up first please");
-  };
+  const [verificationCode, setVerificationCode] = useState({
+    state: "default",
+    error : "",
+    code: "",
+  })
+
+ 
+  const onSignUpPress = async () => {
+    if (!isLoaded) {
+      return
+    }
+
+    try {
+      await signUp.create({
+        emailAddress: form.email,
+        password : form.password,
+      })
+
+      await signUp.prepareEmailAddressVerification({ strategy: 'email_code' })
+
+      setVerificationCode({ ...verificationCode, state: "pending"})
+    } catch (err: any) {
+      console.error(JSON.stringify(err, null, 2))
+    }
+  }
+
+  const onPressVerify = async () => {
+    if (!isLoaded) {
+      return
+    }
+
+    try {
+      const completeSignUp = await signUp.attemptEmailAddressVerification({
+        code : verificationCode.code
+      })
+
+      if (completeSignUp.status === 'complete') {
+        await setActive({ session: completeSignUp.createdSessionId })
+        setVerificationCode({ ...verificationCode, state: "success"})
+      } else {
+        console.error(JSON.stringify(completeSignUp, null, 2))
+      }
+    } catch (err: any) {
+      // See https://clerk.com/docs/custom-flows/error-handling
+      // for more info on error handling
+      console.error(JSON.stringify(err, null, 2))
+    }
+  }
 
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -50,7 +100,7 @@ export default function Singup() {
             value={form.password}
             onChangeText={(value) => setForm({ ...form, password: value })} label={""} />
 
-          <CustonButton title="Sing up" onPress={onSingupPress} className="mt-3 rounded-full shadow-none" />
+          <CustonButton title="Sing up" onPress={onSignUpPress} className="mt-3 rounded-full shadow-none" />
 
           {/* Auth with Google... */}
           <OAuth/>
