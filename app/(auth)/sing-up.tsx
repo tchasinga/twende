@@ -2,12 +2,13 @@ import CustonButton from "@/components/CustonButton";
 import InputField from "../../components/InputField";
 import { icons, images } from "@/constants/data";
 import React, { useState } from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, router } from 'expo-router';
 import OAuth from "@/components/OAuth";
 import { useSignUp } from '@clerk/clerk-expo'
 import ReactNativeModal from "react-native-modal";
+import email from '@/assets/icons/email.png';
 
 
 export default function Singup() {
@@ -20,7 +21,7 @@ export default function Singup() {
   });
 
   const [verificationCode, setVerificationCode] = useState({
-    state: "success",
+    state: "default", 
     error : "",
     code: "",
   })
@@ -41,7 +42,7 @@ export default function Singup() {
 
       setVerificationCode({ ...verificationCode, state: "pending"})
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2))
+    Alert.alert("Error", err.errors[0].longMessage)
     }
   }
 
@@ -67,6 +68,7 @@ export default function Singup() {
       }
     } catch (err: any) {
       console.error(JSON.stringify(err, null, 2))
+
       setVerificationCode({ ...verificationCode, state: "faild", error: err.errors[0].longMessage})
     }
   }
@@ -123,13 +125,39 @@ export default function Singup() {
               <Text className="mt-5 text-xs text-slate-600" >Your account has been verified successfully</Text>
 
               <View className="p-4 text-white font-JakartaBold bg-blue-600 mt-3  rounded-full w-11/12 flex justify-center items-center " >
-              <Text className="text-white" onPress={() => router.replace("/(root)/(tabs)/home")}>
+              <Text className="text-white" onPress={() => router.push("/(root)/(tabs)/home")}>
                     Browser home
              </Text>
               </View>
             </View>
            
           </ReactNativeModal>
+
+          {/* Adding new modal with a pending status...*/}
+          <ReactNativeModal isVisible={verificationCode.state === "pending"}
+          onModalHide={() => setVerificationCode({ ...verificationCode, state: "success"})}
+          >
+            <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px] ">
+              <Text className="text-2xl font-JakartaExtraBold mb-2">Verification</Text>
+              <Text className="text-xs text-slate-600" >Enter the verification code sent to your email</Text>
+
+              <InputField
+                placeholder="Enter verification code"
+                icon={icons.lock}  
+                value={verificationCode.code}
+                keyboardType="numeric"
+                onChangeText={(code) => setVerificationCode({ ...verificationCode, code: code })} label={""} />
+
+              <CustonButton title="Verify" onPress={onPressVerify} className="mt-3 rounded-full shadow-none"  />
+
+              {
+                verificationCode.error !== "" &&
+                <Text className="text-red-500 text-xs mt-2">{verificationCode.error}</Text>
+              }
+            </View>
+          </ReactNativeModal>
+            
+            {/* Adding new modal with a faild status...*/}
         </View>
       </View>
     </SafeAreaView>
