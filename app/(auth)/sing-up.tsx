@@ -13,6 +13,7 @@ import email from '@/assets/icons/email.png';
 
 export default function Singup() {
   const { isLoaded, signUp, setActive } = useSignUp()
+  const [showSuceessModal, setShowSuceessModal] = useState(false)
 
   const [form, setForm] = useState({
     name: "",
@@ -118,14 +119,16 @@ export default function Singup() {
           </Link>
 
           {/* Verification modal will be added here soon...*/}
-          <ReactNativeModal isVisible={verificationCode.state === "success"}>
+          <ReactNativeModal isVisible={showSuceessModal}>
             <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px] flex items-center">
               <Image source={images.check} className="w-[110px] h-[110px]" resizeMode="contain"/>
               <Text className="mt-5 text-2xl font-JakartaExtraBold text-slate-800" >Verified</Text>
               <Text className="mt-5 text-xs text-slate-600" >Your account has been verified successfully</Text>
 
               <View className="p-4 text-white font-JakartaBold bg-blue-600 mt-3  rounded-full w-11/12 flex justify-center items-center " >
-              <Text className="text-white" onPress={() => router.push("/(root)/(tabs)/home")}>
+              <Text className="text-white" onPress={() =>{ 
+                setShowSuceessModal(false)
+                router.push("/(root)/(tabs)/home")}}>
                     Browser home
              </Text>
               </View>
@@ -135,7 +138,9 @@ export default function Singup() {
 
           {/* Adding new modal with a pending status...*/}
           <ReactNativeModal isVisible={verificationCode.state === "pending"}
-          onModalHide={() => setVerificationCode({ ...verificationCode, state: "success"})}
+          onModalHide={() =>{
+            if(verificationCode.state === "success")setShowSuceessModal(true)
+          }}
           >
             <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px] ">
               <Text className="text-2xl font-JakartaExtraBold mb-2">Verification</Text>
