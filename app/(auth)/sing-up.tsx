@@ -122,9 +122,11 @@ export default function Singup() {
               <Text className="mt-5 text-2xl font-JakartaExtraBold text-slate-800" >Verified</Text>
               <Text className="mt-5 text-xs text-slate-600" >Your account has been verified successfully</Text>
 
-              <Text className="p-4 text-white font-JakartaBold bg-blue-600 mt-3 w-11/12 rounded-full flex items-center justify-center" onPress={() => router.replace("/(root)/(tabs)/home")}>
+              <View className="p-4 text-white font-JakartaBold bg-blue-600 mt-3  rounded-full w-11/12 flex justify-center items-center " >
+              <Text className="text-white" onPress={() => router.replace("/(root)/(tabs)/home")}>
                     Browser home
-            </Text>
+             </Text>
+              </View>
             </View>
            
           </ReactNativeModal>
