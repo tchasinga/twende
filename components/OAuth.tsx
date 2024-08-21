@@ -4,6 +4,12 @@ import CustonButton from './CustonButton';
 import { icons } from '@/constants/data';
 
 export default function OAuth() {
+
+  // Adding a sing up with Google
+  const handlerGoogleSingUp = async () => {
+    
+  }
+
   return (
     <View className='flex flex-row justify-center items-center mt-4 rounded-full'>
       <CustonButton title='Auth with Google' className='rounded-full shadow-none' IconLeft={() =>
