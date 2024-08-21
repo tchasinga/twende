@@ -57,16 +57,18 @@ export default function Singup() {
       })
 
       if (completeSignUp.status === 'complete') {
+         
+        //  Once user is verified, we can create a new user on Database... 
+
         await setActive({ session: completeSignUp.createdSessionId })
         setVerificationCode({ ...verificationCode, state: "success"})
       } else {
         console.error(JSON.stringify(completeSignUp, null, 2))
-        setVerificationCode({ ...verificationCode, state: "faild"})
+        setVerificationCode({ ...verificationCode, state: "faild", error: "Verification faild !!"})
       }
     } catch (err: any) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
       console.error(JSON.stringify(err, null, 2))
+      setVerificationCode({ ...verificationCode, state: "faild", error: err.errors[0].longMessage})
     }
   }
 
