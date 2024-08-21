@@ -61,6 +61,7 @@ export default function Singup() {
         setVerificationCode({ ...verificationCode, state: "success"})
       } else {
         console.error(JSON.stringify(completeSignUp, null, 2))
+        setVerificationCode({ ...verificationCode, state: "faild"})
       }
     } catch (err: any) {
       // See https://clerk.com/docs/custom-flows/error-handling
