@@ -9,7 +9,6 @@ export default function OAuth() {
       <CustonButton title='Auth with Google' className='rounded-full shadow-none' IconLeft={() =>
         <Image  source={icons.google} resizeMode='contain' className='w-5 h-5 mx-2'/>
       } />
-
      </View>
   );
 }
