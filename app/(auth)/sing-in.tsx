@@ -4,8 +4,9 @@ import { icons, images } from "@/constants/data";
 import React, { useState } from "react";
 import { View, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import OAuth from "@/components/OAuth";
+import { useSignIn } from "@clerk/clerk-expo";
 
 export default function Singup() {
   const [form, setForm] = useState({
@@ -13,10 +14,36 @@ export default function Singup() {
     password: "",
   });
 
-  const onSingInPress = async (e: any) => {
-    e.preventDefault();
-    alert("Sing in first please");
-  };
+  const { signIn, setActive, isLoaded } = useSignIn()
+  const router = useRouter()
+
+  const [emailAddress, setEmailAddress] = React.useState('')
+  const [password, setPassword] = React.useState('')
+
+  const onSingInPress = React.useCallback(async () => {
+    if (!isLoaded) {
+      return
+    }
+
+    try {
+      const signInAttempt = await signIn.create({
+        identifier: form.email,
+        password: form.password,
+      })
+
+      if (signInAttempt.status === 'complete') {
+        await setActive({ session: signInAttempt.createdSessionId })
+        router.replace('/')
+      } else {
+        // See https://clerk.com/docs/custom-flows/error-handling
+        // for more info on error handling
+        console.error(JSON.stringify(signInAttempt, null, 2))
+      }
+    } catch (err: any) {
+      console.error(JSON.stringify(err, null, 2))
+    }
+  }, [isLoaded, form.email, form.password])
+
 
   return (
     <SafeAreaView className="flex-1 bg-white">
