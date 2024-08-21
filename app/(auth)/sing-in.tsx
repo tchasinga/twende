@@ -13,7 +13,7 @@ export default function Singup() {
     password: "",
   });
 
-  const onSingupPress = async (e: any) => {
+  const onSingInPress = async (e: any) => {
     e.preventDefault();
     alert("Sing in first please");
   };
@@ -44,7 +44,7 @@ export default function Singup() {
             value={form.password}
             onChangeText={(value) => setForm({ ...form, password: value })} label={""} />
 
-          <CustonButton title="Sing in" onPress={onSingupPress} className="mt-3 rounded-full shadow-none" />
+          <CustonButton title="Sing in" onPress={onSingInPress} className="mt-3 rounded-full shadow-none" />
 
           {/* Auth with Google... */}
           <OAuth/>
