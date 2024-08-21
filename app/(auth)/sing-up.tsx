@@ -4,15 +4,14 @@ import { icons, images } from "@/constants/data";
 import React, { useState } from "react";
 import { View, Text, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Link } from "expo-router";
+import { Link, router } from 'expo-router';
 import OAuth from "@/components/OAuth";
 import { useSignUp } from '@clerk/clerk-expo'
-import { useRouter } from 'expo-router'
+import ReactNativeModal from "react-native-modal";
 
 
 export default function Singup() {
   const { isLoaded, signUp, setActive } = useSignUp()
-  const router = useRouter()
 
   const [form, setForm] = useState({
     name: "",
@@ -21,7 +20,7 @@ export default function Singup() {
   });
 
   const [verificationCode, setVerificationCode] = useState({
-    state: "default",
+    state: "success",
     error : "",
     code: "",
   })
@@ -117,6 +116,18 @@ export default function Singup() {
           </Link>
 
           {/* Verification modal will be added here soon...*/}
+          <ReactNativeModal isVisible={verificationCode.state === "success"}>
+            <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px] flex items-center">
+              <Image source={images.check} className="w-[110px] h-[110px]" resizeMode="contain"/>
+              <Text className="mt-5 text-2xl font-JakartaExtraBold text-slate-800" >Verified</Text>
+              <Text className="mt-5 text-xs text-slate-600" >Your account has been verified successfully</Text>
+
+              <Text className="p-4 text-white font-JakartaBold bg-blue-600 mt-3 w-11/12 rounded-full flex items-center justify-center" onPress={() => router.replace("/(root)/(tabs)/home")}>
+                    Browser home
+            </Text>
+            </View>
+           
+          </ReactNativeModal>
         </View>
       </View>
     </SafeAreaView>
