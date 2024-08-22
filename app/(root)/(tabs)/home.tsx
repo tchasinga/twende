@@ -1,3 +1,5 @@
+
+import GoogleInput from "@/components/GoogleInput";
 import RideCards from "@/components/RideCards";
 import { icons } from "@/constants/data";
 import { useUser } from "@clerk/clerk-expo";
@@ -116,8 +118,12 @@ export default function Page() {
   const { user } = useUser();
   const loading = true;
 
+  // For signout bar methode
   const handelerSingout = () =>{
+  }
 
+  // For search bar 
+  const handleDestinationPress = () => {
   }
 
   return (
@@ -145,7 +151,11 @@ export default function Page() {
             </View>
 
             {/* Addign a needed side of code which is Googl map */}
-             <GoogleInput />
+             <GoogleInput 
+              icon={icons.search}
+              containerStyle="bg-white shadow-md shadow-neutral-300"
+              handlePress={handleDestinationPress}
+             />
           </>
         )}
       />
