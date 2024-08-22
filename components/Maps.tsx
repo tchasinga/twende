@@ -1,8 +1,10 @@
+import { Text , View} from "react-native";
+
 const Maps = () => {
     return (
-        <div>
-        <h1>Maps</h1>
-        </div>
+        <View>
+          <Text>Maps</Text>
+        </View>
     )
 }
 

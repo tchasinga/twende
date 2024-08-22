@@ -1,4 +1,3 @@
-
 import GoogleInput from "@/components/GoogleInput";
 import Maps from "@/components/Maps";
 import RideCards from "@/components/RideCards";
@@ -120,12 +119,10 @@ export default function Page() {
   const loading = true;
 
   // For signout bar methode
-  const handelerSingout = () =>{
-  }
+  const handelerSingout = () => {};
 
-  // For search bar 
-  const handleDestinationPress = () => {
-  }
+  // For search bar
+  const handleDestinationPress = () => {};
 
   return (
     <SafeAreaView>
@@ -137,11 +134,12 @@ export default function Page() {
         contentContainerStyle={{
           paddingBottom: 100,
         }}
-        ListHeaderComponent={(
+        ListHeaderComponent={
           <>
             <View className="flex flex-row items-center justify-between my-5">
               <Text className="font-JakartaExtraBold">
-              Welcome back, {user?.emailAddresses[0].emailAddress.split("@")[0]}  👋
+                Welcome back,{" "}
+                {user?.emailAddresses[0].emailAddress.split("@")[0]} 👋
               </Text>
               <TouchableOpacity
                 onPress={handelerSingout}
@@ -152,27 +150,28 @@ export default function Page() {
             </View>
 
             {/* Addign a needed side of code which is Googl map */}
-             <GoogleInput 
+            <GoogleInput
               icon={icons.search}
               containerStyle="bg-white shadow-md shadow-neutral-300"
               handlePress={handleDestinationPress}
-             />
+            />
 
-             {/* Adding a selecter.. */}
-             <>
+            {/* Adding a selecter.. */}
+            <>
               <Text className="font-JakartaBold text-xl justify-between mt-5 mb-3">
                 Your currents location
               </Text>
+              
               <View className="flex flex-row items-center bg-transparent h-[300px]">
-               <Maps />
+                <Maps />
               </View>
 
               <Text className="font-JakartaBold text-xl justify-between mt-5 mb-3">
                 Recent Rides
               </Text>
-             </>
+            </>
           </>
-        )}
+        }
       />
     </SafeAreaView>
   );
