@@ -9,6 +9,7 @@ import OAuth from "@/components/OAuth";
 import { useSignUp } from '@clerk/clerk-expo'
 import ReactNativeModal from "react-native-modal";
 import email from '@/assets/icons/email.png';
+import { fetchAPI } from "@/lib/fetch";
 
 
 export default function Singup() {
@@ -60,6 +61,17 @@ export default function Singup() {
       if (completeSignUp.status === 'complete') {
          
         //  Once user is verified, we can create a new user on Database... 
+        await fetch('/(api)/user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            clerkId: completeSignUp.createdUserId,
+          }),
+        });
 
         await setActive({ session: completeSignUp.createdSessionId })
         setVerificationCode({ ...verificationCode, state: "success"})
