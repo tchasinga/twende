@@ -114,7 +114,11 @@ const recentRides = [
 
 export default function Page() {
   const { user } = useUser();
-  console.log(user);
+  const loading = true;
+
+  const handelerSingout = () =>{
+
+  }
 
   return (
     <SafeAreaView>
@@ -129,7 +133,7 @@ export default function Page() {
         ListHeaderComponent={() => (
           <View className="p-5 flex-1 items-center justify-center">
               <Text className="text-xs font-JakartaBold text-slate-800">
-                Welcome back, {user?.emailAddresses[0].emailAddress}
+                Welcome back, {user?.emailAddresses[0].emailAddress.split("@")[0]}
               </Text>
               <Text className="text-lg font-JakartaMedium text-slate-500">
                 Here are your recent rides
@@ -137,7 +141,7 @@ export default function Page() {
       
 
            
-              <TouchableOpacity className="py-1 flex-1 justify-center items-end">
+              <TouchableOpacity className="py-1 flex-1 justify-center items-end" onPress={handelerSingout}>
                 <Image source={icons.out} className="w-5 h-5" />
               </TouchableOpacity>
             
