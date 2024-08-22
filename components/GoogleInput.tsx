@@ -10,7 +10,9 @@ const GoogleInput = ({
     handlePress,
   }: GoogleInputProps) => {
   return (
-    <View>
+    <View
+    className={`flex flex-row items-center justify-center relative z-50 mb-2 rounded-xl ${containerStyle}`}
+    >
       <Text>Search...</Text>
      </View>
   );

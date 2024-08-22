@@ -156,6 +156,16 @@ export default function Page() {
               containerStyle="bg-white shadow-md shadow-neutral-300"
               handlePress={handleDestinationPress}
              />
+
+             {/* Adding a selecter.. */}
+             <>
+              <Text className="font-JakartaBold text-xl justify-between mt-5 mb-3">
+                Your currents location
+              </Text>
+              <View className="flex flex-row items-center bg-transparent h-[300px]">
+                 
+              </View>
+             </>
           </>
         )}
       />
