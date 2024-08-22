@@ -145,6 +145,7 @@ export default function Page() {
             </View>
 
             {/* Addign a needed side of code which is Googl map */}
+             <GoogleInput />
           </>
         )}
       />
