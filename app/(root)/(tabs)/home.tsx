@@ -1,7 +1,8 @@
 import RideCards from "@/components/RideCards";
+import { icons } from "@/constants/data";
 import { useUser } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const recentRides = [
@@ -126,13 +127,20 @@ export default function Page() {
           paddingBottom: 100,
         }}
         ListHeaderComponent={() => (
-          <View className="p-5">
-            <Text className="text-xs font-JakartaBold text-slate-800">
-              Welcome back, {user?.emailAddresses[0].emailAddress}
-            </Text>
-            <Text className="text-lg font-JakartaMedium text-slate-500">
-              Here are your recent rides
-            </Text>
+          <View className="p-5 flex-1 items-center justify-center">
+              <Text className="text-xs font-JakartaBold text-slate-800">
+                Welcome back, {user?.emailAddresses[0].emailAddress}
+              </Text>
+              <Text className="text-lg font-JakartaMedium text-slate-500">
+                Here are your recent rides
+              </Text>
+      
+
+           
+              <TouchableOpacity className="py-1 flex-1 justify-center items-end">
+                <Image source={icons.out} className="w-5 h-5" />
+              </TouchableOpacity>
+            
           </View>
         )}
       />
