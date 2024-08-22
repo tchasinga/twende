@@ -2,6 +2,7 @@ import { Tabs } from "expo-router";
 import { Image, ImageSourcePropType, View } from "react-native";
 
 import { icons } from "@/constants/data";
+import History from './history';
 
 const TabIcon = ({
     source,
@@ -87,6 +88,16 @@ export default function Layout() {
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
                         <TabIcon source={icons.profile} focused={focused} />
+                    ),
+                }}
+            />
+             <Tabs.Screen
+                name="history"
+                options={{
+                    title: "history",
+                    headerShown: false,
+                    tabBarIcon: ({ focused }) => (
+                        <TabIcon source={icons.checkmark} focused={focused} />
                     ),
                 }}
             />
