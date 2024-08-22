@@ -130,22 +130,22 @@ export default function Page() {
         contentContainerStyle={{
           paddingBottom: 100,
         }}
-        ListHeaderComponent={() => (
-          <View className="p-5 flex-1 items-center justify-center">
-              <Text className="text-xs font-JakartaBold text-slate-800">
-                Welcome back, {user?.emailAddresses[0].emailAddress.split("@")[0]}
+        ListHeaderComponent={(
+          <>
+            <View className="flex flex-row items-center justify-between my-5">
+              <Text className="font-JakartaExtraBold">
+              Welcome back, {user?.emailAddresses[0].emailAddress.split("@")[0]}  👋
               </Text>
-              <Text className="text-lg font-JakartaMedium text-slate-500">
-                Here are your recent rides
-              </Text>
-      
-
-           
-              <TouchableOpacity className="py-1 flex-1 justify-center items-end" onPress={handelerSingout}>
-                <Image source={icons.out} className="w-5 h-5" />
+              <TouchableOpacity
+                onPress={handelerSingout}
+                className="justify-center items-center w-10 h-10 rounded-full bg-white"
+              >
+                <Image source={icons.out} className="w-4 h-4" />
               </TouchableOpacity>
-            
-          </View>
+            </View>
+
+            {/* Addign a needed side of code which is Googl map */}
+          </>
         )}
       />
     </SafeAreaView>
