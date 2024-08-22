@@ -1,8 +1,9 @@
 import { Tabs } from "expo-router";
-import { Image, ImageSourcePropType, View } from "react-native";
+import { Image, ImageSourcePropType, View, Animated } from "react-native";
+import { useState, useEffect } from "react";
 
 import { icons } from "@/constants/data";
-import History from './history';
+
 
 const TabIcon = ({
     source,
@@ -10,22 +11,43 @@ const TabIcon = ({
 }: {
     source: ImageSourcePropType;
     focused: boolean;
-}) => (
-    <View
-        className={`flex flex-row justify-center items-center rounded-full ${focused ? "bg-general-300" : ""}`}
-    >
-        <View
-            className={`rounded-full w-12 h-12 items-center justify-center ${focused ? "bg-general-400" : ""}`}
+}) => {
+    const [scale] = useState(new Animated.Value(1));
+
+    useEffect(() => {
+        Animated.spring(scale, {
+            toValue: focused ? 1.2 : 1,
+            useNativeDriver: true,
+        }).start();
+    }, [focused]);
+
+    return (
+        <Animated.View
+            style={{
+                transform: [{ scale }],
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.3,
+                shadowRadius: 3.84,
+            }}
         >
-            <Image
-                source={source}
-                tintColor="white"
-                resizeMode="contain"
-                className="w-7 h-7"
-            />
-        </View>
-    </View>
-);
+            <View
+                className={`flex flex-row justify-center items-center rounded-full ${focused ? "bg-general-300" : ""}`}
+            >
+                <View
+                    className={`rounded-full w-14 h-14 items-center justify-center ${focused ? "bg-general-400" : ""}`}
+                >
+                    <Image
+                        source={source}
+                        tintColor="white"
+                        resizeMode="contain"
+                        className="w-8 h-8"
+                    />
+                </View>
+            </View>
+        </Animated.View>
+    );
+};
 
 export default function Layout() {
     return (
@@ -36,7 +58,7 @@ export default function Layout() {
                 tabBarInactiveTintColor: "white",
                 tabBarShowLabel: false,
                 tabBarStyle: {
-                    backgroundColor: "#333333",
+                    backgroundColor: "#a4c6b8",
                     borderRadius: 50,
                     paddingBottom: 0, // ios only
                     overflow: "hidden",
@@ -48,6 +70,11 @@ export default function Layout() {
                     alignItems: "center",
                     flexDirection: "row",
                     position: "absolute",
+                    shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 10 },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 10,
+                    elevation: 5,
                 },
             }}
         >
@@ -94,7 +121,7 @@ export default function Layout() {
              <Tabs.Screen
                 name="history"
                 options={{
-                    title: "history",
+                    title: "History",
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
                         <TabIcon source={icons.checkmark} focused={focused} />
