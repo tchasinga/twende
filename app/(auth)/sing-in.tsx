@@ -17,9 +17,7 @@ export default function Singup() {
   const { signIn, setActive, isLoaded } = useSignIn()
   const router = useRouter()
 
-  const [emailAddress, setEmailAddress] = React.useState('')
-  const [password, setPassword] = React.useState('')
-
+ 
   const onSingInPress = React.useCallback(async () => {
     if (!isLoaded) {
       return
@@ -55,7 +53,7 @@ export default function Singup() {
             resizeMode="contain"
           />
           <Text className="text-xl text-slate-900 font-JakartaSemiBold absolute bottom-5 left-5">
-            Create an accounts
+            Welcom
           </Text>
         </View>
 

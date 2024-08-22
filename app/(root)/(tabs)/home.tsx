@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function Page() {
   const { user } = useUser()
+  
 
   return (
     <SafeAreaView>
