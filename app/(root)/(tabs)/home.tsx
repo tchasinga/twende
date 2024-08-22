@@ -1,5 +1,6 @@
 
 import GoogleInput from "@/components/GoogleInput";
+import Maps from "@/components/Maps";
 import RideCards from "@/components/RideCards";
 import { icons } from "@/constants/data";
 import { useUser } from "@clerk/clerk-expo";
@@ -163,8 +164,12 @@ export default function Page() {
                 Your currents location
               </Text>
               <View className="flex flex-row items-center bg-transparent h-[300px]">
-                 
+               <Maps />
               </View>
+
+              <Text className="font-JakartaBold text-xl justify-between mt-5 mb-3">
+                Recent Rides
+              </Text>
              </>
           </>
         )}
