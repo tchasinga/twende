@@ -140,7 +140,7 @@ export default function Singup() {
               <View className="p-4 text-white font-JakartaBold bg-blue-600 mt-3  rounded-full w-11/12 flex justify-center items-center " >
               <Text className="text-white" onPress={() =>{ 
                 setShowSuceessModal(false)
-                router.push("/(root)/(tabs)/home")}}>
+                router.replace("/(root)/(tabs)/home")}}>
                     Browser home
              </Text>
               </View>

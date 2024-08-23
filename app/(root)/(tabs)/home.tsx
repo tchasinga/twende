@@ -2,10 +2,13 @@ import GoogleInput from "@/components/GoogleInput";
 import Maps from "@/components/Maps";
 import RideCards from "@/components/RideCards";
 import { icons } from "@/constants/data";
+import { useLocationStore } from "@/store";
 import { useUser } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
+import { useEffect, useState } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as Location from "expo-location";
 
 const recentRides = [
   {
@@ -117,7 +120,32 @@ const recentRides = [
 export default function Page() {
   const { user } = useUser();
   const loading = true;
+  const { setUserLocation, setDestinationLocation } = useLocationStore();
+  const [hasPermission, setHasPermission] = useState<boolean>(false);
 
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setHasPermission(false);
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+
+      const address = await Location.reverseGeocodeAsync({
+        latitude: location.coords?.latitude!,
+        longitude: location.coords?.longitude!,
+      });
+
+      setUserLocation({
+        latitude: location.coords?.latitude,
+        longitude: location.coords?.longitude,
+        address: `${address[0].name}, ${address[0].region}`,
+      });
+    })();
+  }, []);
+     
   // For signout bar methode
   const handelerSingout = () => {};
 
@@ -134,7 +162,7 @@ export default function Page() {
         contentContainerStyle={{
           paddingBottom: 100,
         }}
-        ListHeaderComponent={
+        ListHeaderComponent={ 
           <>
             <View className="flex flex-row items-center justify-between my-5">
               <Text className="font-JakartaExtraBold">
